@@ -10,11 +10,9 @@ import gc
 
 class FilterGeneticAlgorithm:
     
-    def __init__(self, X_train=None, Y_train=None, X_test=None, Y_test=None, model=None, loss=None):
+    def __init__(self, X_train=None, Y_train=None, model=None, loss=None):
         self.X_train = X_train
         self.Y_train = Y_train
-        self.X_test = X_test
-        self.Y_test = Y_test
         self.model=model
         self.loss=loss
     
