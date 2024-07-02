@@ -21,7 +21,6 @@ class EdgeFilter:
         
         image = np.zeros((100, 400, 3), dtype=np.uint8)
         
-        # taskbar for edge creation
         cv.line(image, (0, 50), (400, 50), (255, 255, 255), 2)
         cv.createTrackbar('Use Canny?', self.TRACKBAR_WINDOW, 0, 1, nothing)
         cv.createTrackbar('KernelSize', self.TRACKBAR_WINDOW, 1, 30, nothing)
@@ -30,7 +29,6 @@ class EdgeFilter:
         cv.createTrackbar('Canny1', self.TRACKBAR_WINDOW, 0, 200, nothing)
         cv.createTrackbar('Canny2', self.TRACKBAR_WINDOW, 0, 500, nothing)
         
-        # Set default value for Canny trackbars
         cv.setTrackbarPos('KernelSize', self.TRACKBAR_WINDOW, 5)
         cv.setTrackbarPos('Canny1', self.TRACKBAR_WINDOW, 100)
         cv.setTrackbarPos('Canny2', self.TRACKBAR_WINDOW, 200)
@@ -47,7 +45,6 @@ class EdgeFilter:
     
     
     def apply_edge_filter(self, original_image, edge_filter=None):
-        # if we haven't been given a defined filter, use the filter values from the GUI
         if not edge_filter:
             edge_filter = self.get_edge_filter_from_controls()
 
@@ -55,10 +52,8 @@ class EdgeFilter:
         eroded_image = cv.erode(original_image, kernel, iterations=edge_filter.erodeIter)
         dilated_image = cv.dilate(eroded_image, kernel, iterations=edge_filter.dilateIter)
 
-        # canny edge detection
         result = cv.Canny(dilated_image, edge_filter.canny1, edge_filter.canny2)
 
-        # convert single channel image back to BGR
         img = cv.cvtColor(result, cv.COLOR_GRAY2BGR)
 
         return img

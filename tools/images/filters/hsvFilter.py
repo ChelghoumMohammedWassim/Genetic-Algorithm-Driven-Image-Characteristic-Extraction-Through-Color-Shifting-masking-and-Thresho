@@ -73,6 +73,7 @@ class HsvFilter:
         upper = np.array([hsv_filter.hMax, hsv_filter.sMax, hsv_filter.vMax])
 
         mask = cv.inRange(hsv, lower, upper)
+        
         result = cv.bitwise_and(hsv, hsv, mask=mask)
 
         img = cv.cvtColor(result, cv.COLOR_HSV2BGR)
